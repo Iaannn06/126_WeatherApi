@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Cuaca</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; margin: 0; }
+        .container { border: 2px solid #333; padding: 20px; border-radius: 8px; width: 300px; background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; text-align: center; }
+        .search-box { display: flex; margin-bottom: 20px; }
+        #lokasi-input { flex-grow: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        #get-btn { padding: 8px 12px; margin-left: 10px; border: none; background-color: #007bff; color: white; border-radius: 4px; cursor: pointer; }
+        #get-btn:hover { background-color: #0056b3; }
+        .info p { margin: 10px 0; }
+        .info span { font-weight: bold; color: #333; }
+    </style>
 </head>
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  CUACA : <p id="lokasi"></p>
-  <hr>
-  <div id="tampilan"></div>
 
-   <div class="info">
-    <p>Negara: <span id="negara">-</span></p>
+    <div class="container">
+        <h2>Cuaca</h2>
+        <div class="search-box">
+            <input type="text" id="lokasi-input" placeholder="Masukkan Lokasi...">
+            <button id="get-btn">GET</button>
+        </div>
+        
+        <div class="info">
+            <p>Negara: <span id="negara">-</span></p>
             <p>Provinsi: <span id="provinsi">-</span></p>
             <p>Kecamatan/Kota: <span id="kecamatan">-</span></p>
             <p>Suhu: <span id="suhu">-</span></p>
             <p>Longitude: <span id="longitude">-</span></p>
             <p>Latitude: <span id="latitude">-</span></p>
+        </div>
     </div>
 
-  <script>
-    function getWeather(defaultLocation) {
+    <script>
+        function getWeather(defaultLocation) {
             const lokasi = defaultLocation || $('#lokasi-input').val();
 
             if (!lokasi) {
                 alert("Silakan masukkan nama lokasi!");
                 return;
             }
-        }
 
-        const apiKey = "7a5b54616d174ea48f063944250810";
-        const urlApi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+            const apiKey = "7a5b54616d174ea48f063944250810";
+            const urlApi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
 
-    const urlapi = "http://api.weatherapi.com/v1/current.json?key=7a5b54616d174ea48f063944250810&q=Yogyakarta&aqi=no";
-         $.ajax({
+            $.ajax({
                 url: urlApi,
                 method: "GET",
                 success: function(data) {
@@ -49,10 +63,13 @@
                     alert("Lokasi '" + lokasi + "' tidak ditemukan.");
                 }
             });
-        
-          $(document).ready(function() {
+        }
+
+        $(document).ready(function() {
             
             getWeather('Yogyakarta');
+
+
             $('#get-btn').on('click', function() {
                 getWeather();
             });
@@ -64,6 +81,6 @@
                 }
             });
         });
-  </script>
+    </script>
 </body>
 </html>
