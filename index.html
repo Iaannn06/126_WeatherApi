@@ -49,6 +49,21 @@
                     alert("Lokasi '" + lokasi + "' tidak ditemukan.");
                 }
             });
+        
+          $(document).ready(function() {
+            
+            getWeather('Yogyakarta');
+            $('#get-btn').on('click', function() {
+                getWeather();
+            });
+
+
+            $('#lokasi-input').on('keypress', function(e) {
+                if (e.which === 13) {
+                    getWeather();
+                }
+            });
+        });
   </script>
 </body>
 </html>
