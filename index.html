@@ -34,26 +34,21 @@
         const urlApi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
 
     const urlapi = "http://api.weatherapi.com/v1/current.json?key=7a5b54616d174ea48f063944250810&q=Yogyakarta&aqi=no";
-    $.ajax({
-      url: urlapi,
-      method: "GET",
-      success: function(data) {
-        console.log(data);
-
-        const v = document.getElementById("tampilan");
-        const l = document.getElementById("lokasi");
-
-        let suhu = data.current .temp_c;
-        let lokasi = data.location.name;
-
-        v.innerHTML =suhu;
-        l.innerHTML =lokasi;
-
-      },
-      fail: function (error){
-        console.log(error);
-      }
-    })
+         $.ajax({
+                url: urlApi,
+                method: "GET",
+                success: function(data) {
+                    $('#negara').text(data.location.country);
+                    $('#provinsi').text(data.location.region);
+                    $('#kecamatan').text(data.location.name);
+                    $('#suhu').text(data.current.temp_c + " °C");
+                    $('#longitude').text(data.location.lon);
+                    $('#latitude').text(data.location.lat);
+                },
+                error: function(error) {
+                    alert("Lokasi '" + lokasi + "' tidak ditemukan.");
+                }
+            });
   </script>
 </body>
 </html>
