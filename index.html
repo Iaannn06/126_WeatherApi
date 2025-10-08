@@ -29,7 +29,10 @@
                 return;
             }
         }
-        
+
+        const apiKey = "7a5b54616d174ea48f063944250810";
+        const urlApi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+
     const urlapi = "http://api.weatherapi.com/v1/current.json?key=7a5b54616d174ea48f063944250810&q=Yogyakarta&aqi=no";
     $.ajax({
       url: urlapi,
